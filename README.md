@@ -8,9 +8,8 @@
 
 - Once CORS was properly configured on your Express server, the browser allowed the requests to go through, and your React application was able to fetch data from the `/messages` endpoint without encountering CORS errors.
 
-
 - Postgres reailway env variables
-
+```sql
 DATABASE_PRIVATE_URL=postgresql://${{PGUSER}}:${{POSTGRES_PASSWORD}}@${{RAILWAY_PRIVATE_DOMAIN}}:5432/${{PGDATABASE}}
 DATABASE_URL=postgresql://${{PGUSER}}:${{POSTGRES_PASSWORD}}@${{RAILWAY_TCP_PROXY_DOMAIN}}:${{RAILWAY_TCP_PROXY_PORT}}/${{PGDATABASE}}
 PGDATA=/var/lib/postgresql/data/pgdata
@@ -22,4 +21,5 @@ PGUSER=${{POSTGRES_USER}}
 POSTGRES_DB=railway
 POSTGRES_PASSWORD=1eC-Ffcad6FBG3aag-6D3cAbGaD2G*4G
 POSTGRES_USER=postgres
-SSL_CERT_DAYS=820# simple-message-display
+SSL_CERT_DAYS=820
+```

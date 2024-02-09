@@ -8,25 +8,31 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
+// const port = process.env.VITE_PORT;
+console.log(process.env.POSTGRES_URL)
 
 app.use(cors({
     origin: process.env.CORS_ORIGIN
 }));
 
+// const pool = new pg.Pool({
+//     user: process.env.DB_USER,
+//     host: process.env.DB_HOST,
+//     database: process.env.DB_DATABASE,
+//     password: process.env.DB_PASSWORD,
+//     port: process.env.DB_PORT,
+// });
+
 const pool = new pg.Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_DATABASE,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
-});
+    connectionString: process.env.POSTGRES_URL,
+})
 
 app.use(bodyParser.json());
 
 app.get('/messages', async (req, res) => {
     try {
         const { rows } = await pool.query('SELECT content FROM messages');
-        console.log(rows);
+        // console.log(rows);
         res.json(rows);
 
     } catch (err) {
