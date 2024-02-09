@@ -21,5 +21,10 @@ PGUSER=${{POSTGRES_USER}}
 POSTGRES_DB=railway
 POSTGRES_PASSWORD=1eC-Ffcad6FBG3aag-6D3cAbGaD2G*4G
 POSTGRES_USER=postgres
+<<<<<<< HEAD
 SSL_CERT_DAYS=820
 ```
+=======
+SSL_CERT_DAYS=820# simple-message-display
+```
+>>>>>>> 385b122ae720a02397d7b3a3e5292648bb611ed9
