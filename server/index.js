@@ -22,11 +22,14 @@ const pool = new pg.Pool({
     port: process.env.PGPORT,
 });
 
+
 app.get('/messages', async (req, res) => {
     try {
         const query = 'SELECT content FROM messages';
         const { rows } = await pool.query(query);
         res.json(rows);
+        // res.send("hello")
+        console.log(rows);
     } catch (err) {
         console.error('Error executing query', err);
         res.status(500).json({ error: 'Internal Server Error' });
