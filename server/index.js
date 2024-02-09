@@ -22,6 +22,9 @@ const pool = new pg.Pool({
     port: process.env.PGPORT,
 });
 
+app.get('/', async (req, res) => {
+    res.send("hello");
+})
 
 app.get('/messages', async (req, res) => {
     try {
