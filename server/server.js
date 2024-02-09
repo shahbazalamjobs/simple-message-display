@@ -8,37 +8,28 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
-// const port = process.env.VITE_PORT;
-console.log(process.env.POSTGRES_URL)
 
 app.use(cors({
-    origin: process.env.CORS_ORIGIN
+    origin: 'http://localhost:5173'
 }));
-
-// const pool = new pg.Pool({
-//     user: process.env.DB_USER,
-//     host: process.env.DB_HOST,
-//     database: process.env.DB_DATABASE,
-//     password: process.env.DB_PASSWORD,
-//     port: process.env.DB_PORT,
-// });
+app.use(bodyParser.json());
 
 const pool = new pg.Pool({
-    connectionString: process.env.POSTGRES_URL,
-})
-
-app.use(bodyParser.json());
+    user: process.env.PGUSER,
+    host: process.env.PGHOST,
+    database: process.env.PGDATABASE,
+    password: process.env.PGPASSWORD,
+    port: process.env.PGPORT,
+});
 
 app.get('/messages', async (req, res) => {
     try {
-        const { rows } = await pool.query('SELECT content FROM messages');
-        // console.log(rows);
+        const query = 'SELECT content FROM messages';
+        const { rows } = await pool.query(query);
         res.json(rows);
-
     } catch (err) {
         console.error('Error executing query', err);
         res.status(500).json({ error: 'Internal Server Error' });
-        console.log(err)
     }
 });
 
